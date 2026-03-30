@@ -1,0 +1,25 @@
+name: Build HEVD win10-klfh
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: win10-klfh
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build Driver
+        run: |
+          msbuild Driver\HEVD.sln /p:Configuration="Win10 Debug" /p:Platform=x64 /p:TargetVersion="Windows10"
+        # Note: Adjust path if HEVD.sln is in a different subdirectory in this branch
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HEVD-Driver-Binary
+          path: "**/*.sys"
