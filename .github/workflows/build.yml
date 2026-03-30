@@ -15,8 +15,8 @@ jobs:
 
       - name: Build Driver
         run: |
-          msbuild Driver\HEVD.sln /p:Configuration="Win10 Debug" /p:Platform=x64 /p:TargetVersion="Windows10"
-        # Note: Adjust path if HEVD.sln is in a different subdirectory in this branch
+          msbuild HEVD.sln /p:Configuration="Win10 Debug" /p:Platform=x64 /p:TargetVersion="Windows10"
+
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
